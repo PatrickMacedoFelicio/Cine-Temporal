@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sistema-Cine", "Sistema-Cine\Sistema-Cine.csproj", "{DC0456C3-533A-453A-B1A3-3AF98FF93891}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DC0456C3-533A-453A-B1A3-3AF98FF93891}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC0456C3-533A-453A-B1A3-3AF98FF93891}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC0456C3-533A-453A-B1A3-3AF98FF93891}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC0456C3-533A-453A-B1A3-3AF98FF93891}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
