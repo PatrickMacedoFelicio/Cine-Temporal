@@ -7,4 +7,9 @@
         <RootNamespace>Sistema_Cine</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Folder Include="Repositories\" />
+      <Folder Include="Services\" />
+    </ItemGroup>
+
 </Project>
