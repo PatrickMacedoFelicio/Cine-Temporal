@@ -2,8 +2,27 @@ using Sistema_Cine.Data;
 using Sistema_Cine.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SeuProjeto.Repositories;
+using SeuProjeto.Services;
+using Sistema_Cine.Services;
+using Sistema_Cine.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// 1. Habilitar Cache em Memória
+builder.Services.AddMemoryCache();
+
+// 2. Configurar o Cliente HTTP para o TMDb
+builder.Services.AddHttpClient<ITmdbApiService, TmdbApiService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.themoviedb.org/3/");
+    client.DefaultRequestHeaders.Add("Accept", "application/json");
+});
+
+// 3. Configurar o Cliente HTTP para o Open-Meteo
+builder.Services.AddHttpClient<IWeatherApiService, WeatherApiService>(client =>
+{
+    client.BaseAddress = new Uri("https://api.open-meteo.com/v1/");
+});
 
 // 1) Configuração do SQLite (RF11)
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -30,6 +49,8 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+
+
 
 app.UseHttpsRedirection();
 
