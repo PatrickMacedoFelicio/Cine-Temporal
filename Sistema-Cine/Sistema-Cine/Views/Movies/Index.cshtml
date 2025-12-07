@@ -1,0 +1,42 @@
+﻿@model Sistema_Cine.ViewModels.SearchViewModel
+
+<h2>Catálogo</h2>
+
+<div class="d-flex justify-content-end mb-2">
+    <a class="btn btn-outline-secondary me-2" href="@Url.Action("ExportCsv", "Movies")">Exportar CSV</a>
+    <a class="btn btn-outline-secondary" href="@Url.Action("ExportExcel", "Movies")">Exportar Excel</a>
+</div>
+
+@if (!Model.Movies.Any())
+{
+    <div class="text-muted">Nenhum filme no catálogo.</div>
+}
+else
+{
+    <div class="row">
+        @foreach(var m in Model.Movies)
+        {
+            <div class="col-md-6">
+                @await Html.PartialAsync("_MovieCard", m)
+            </div>
+        }
+    </div>
+
+    <nav aria-label="paginacao-local" class="mt-3">
+        <ul class="pagination">
+            @if(Model.Page > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Movies", new { page = Model.Page -1 })">Anterior</a>
+                </li>
+            }
+            <li class="page-item disabled"><span class="page-link">Página @Model.Page</span></li>
+            @if(Model.HasNext)
+            {
+                <li class="page-item">
+                    <a class="page-link" href="@Url.Action("Index", "Movies", new { page = Model.Page +1 })">Próxima</a>
+                </li>
+            }
+        </ul>
+    </nav>
+}

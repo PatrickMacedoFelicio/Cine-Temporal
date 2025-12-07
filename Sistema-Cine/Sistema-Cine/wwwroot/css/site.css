@@ -29,3 +29,6 @@ body {
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
 }
+
+.movie-card .card-body { padding: 0.6rem; }
+.weather-day { background: #f8f9fa; border-radius: 6px; padding: 0.6rem; }
