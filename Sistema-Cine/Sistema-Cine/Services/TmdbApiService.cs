@@ -4,7 +4,7 @@ using Sistema_Cine.DTOs;
 using Sistema_Cine.Services.Interfaces;
 using System.Text.Json;
 
-namespace SeuProjeto.Services
+namespace Sistema_Cine.Services
 {
     public class TmdbApiService : ITmdbApiService
     {

@@ -2,7 +2,7 @@ using Sistema_Cine.Data;
 using Sistema_Cine.Repositories;
 using Microsoft.EntityFrameworkCore;
 using SeuProjeto.Repositories;
-using SeuProjeto.Services;
+using Sistema_Cine.Services;
 using Sistema_Cine.Services;
 using Sistema_Cine.Services.Interfaces;
 

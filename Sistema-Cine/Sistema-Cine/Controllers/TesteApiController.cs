@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Sistema_Cine.Services.Interfaces;
 
-namespace SeuProjeto.Controllers
+namespace Sistema_Cine.Controllers
 {
     public class TesteApiController : Controller
     {
