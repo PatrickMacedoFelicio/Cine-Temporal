@@ -5,11 +5,8 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>Sistema_Cine</RootNamespace>
+        <UserSecretsId>1067234e-b9cc-483d-b948-87f41b113255</UserSecretsId>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Folder Include="Services\" />
-    </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0" />
