@@ -1114,32 +1114,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\2023102060025\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\patri\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\2023102060025\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
+      "projectUniqueName": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
       "projectName": "Sistema-Cine",
-      "projectPath": "C:\\Users\\2023102060025\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
-      "packagesPath": "C:\\Users\\2023102060025\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\2023102060025\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\obj\\",
+      "projectPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
+      "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\2023102060025\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1192,7 +1184,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\patri\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
