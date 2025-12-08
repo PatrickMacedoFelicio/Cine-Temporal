@@ -1,10 +1,10 @@
 ﻿using Sistema_Cine.Models;
 
-namespace Sistema_Cine.Services
+namespace Sistema_Cine.Services.Interfaces
 {
     public interface IExportService
     {
-        byte[] ExportFilmesToExcel(List<Filme> filmes);
-        byte[] ExportFilmesToCsv(List<Filme> filmes);
+        byte[] ExportarCsv(IEnumerable<Filme> filmes);
+        byte[] ExportarExcel(IEnumerable<Filme> filmes);
     }
 }
