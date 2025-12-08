@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Sistema_Cine.Models;
 
-namespace SeuProjeto.Repositories
+namespace Sistema_Cine.Repositories
 {
     public interface IFilmeRepository
     {

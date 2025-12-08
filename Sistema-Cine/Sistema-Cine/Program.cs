@@ -1,8 +1,6 @@
 using Sistema_Cine.Data;
 using Sistema_Cine.Repositories;
 using Microsoft.EntityFrameworkCore;
-using SeuProjeto.Repositories;
-using Sistema_Cine.Services;
 using Sistema_Cine.Services;
 using Sistema_Cine.Services.Interfaces;
 
@@ -50,6 +48,11 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+// Para as panilhas
+builder.Services.AddScoped<ExportService>();
+
+// Para os logs
+builder.Services.AddScoped<ILogService, LogService>();
 
 
 app.UseHttpsRedirection();
