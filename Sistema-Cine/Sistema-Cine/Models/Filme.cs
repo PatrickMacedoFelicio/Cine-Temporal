@@ -1,29 +1,58 @@
-﻿namespace Sistema_Cine.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Filme
+namespace Sistema_Cine.Models
 {
-    public int Id { get; set; }
-    public int TmdbId { get; set; }
+    public class Filme
+    {
+        [Key]
+        public int Id { get; set; } 
+        
+        // TMDb
 
-    public string Titulo { get; set; }
-    public string TituloOriginal { get; set; }
-    public string Sinopse { get; set; }
-    public DateTime? DataLancamento { get; set; }
+        [Required]
+        [Display(Name = "Título")]
+        public string Titulo { get; set; }
 
-    public string Genero { get; set; }
-    public string PosterPath { get; set; }
-    public string Lingua { get; set; }
-    public int? Duracao { get; set; }
-    public double? NotaMedia { get; set; }
+        [Display(Name = "Descrição")]
+        [DataType(DataType.MultilineText)]
+        public string? Descricao { get; set; }
 
-    public string ElencoPrincipal { get; set; }
+        [Display(Name = "Data de Lançamento")]
+        public string? DataLancamento { get; set; } // O TMDb envia como string yyyy-mm-dd
 
-    // Dados da cidade (da API Open-Meteo)
-    public string CidadeReferencia { get; set; }
-    public double? Latitude { get; set; }
-    public double? Longitude { get; set; }
+        [Display(Name = "Nota (TMDb)")]
+        public double? Nota { get; set; }
 
-    // Metadados para logs no futuro
-    public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
-    public DateTime DataAtualizacao { get; set; } = DateTime.UtcNow;
+        [Display(Name = "ID do TMDb")]
+        public int? TmdbId { get; set; }
+
+        // Caminho parcial recebido da API
+        [Display(Name = "Poster TMDb")]
+        public string? PosterPath { get; set; }
+
+        // Caminho completo montado no Controller
+        [NotMapped]
+        public string PosterCompleto =>
+            string.IsNullOrWhiteSpace(PosterPath)
+                ? "/img/no-poster.png"
+                : $"https://image.tmdb.org/t/p/w500{PosterPath}";
+        
+        // Campos adicionados manualmente (RF03)
+
+
+        [Display(Name = "Cidade")]
+        public string? Cidade { get; set; }
+
+        [Display(Name = "Latitude")]
+        public double? Latitude { get; set; }
+
+        [Display(Name = "Longitude")]
+        public double? Longitude { get; set; }
+        
+        // Campos auxiliares para organização
+
+        [Display(Name = "Data de Importação")]
+        public DateTime DataImportacao { get; set; } = DateTime.Now;
+    }
 }

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj": {}
+    "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj": {}
   },
   "projects": {
-    "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj": {
+    "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
+        "projectUniqueName": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
         "projectName": "Sistema-Cine",
-        "projectPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
-        "packagesPath": "/Users/semeler/.nuget/packages/",
-        "outputPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/obj/",
+        "projectPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
+        "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/semeler/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -44,6 +44,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "ClosedXML": {
+              "target": "Package",
+              "version": "[0.105.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.0, )"
@@ -72,7 +76,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/Users/semeler/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Users\\patri\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
