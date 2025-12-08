@@ -256,3 +256,11 @@ C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\D
 C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\Sistema-.31F6127F.Up2Date
 C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\Sistema-Cine.genruntimeconfig.cache
 C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\ref\Sistema-Cine.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\ClosedXML.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\ClosedXML.Parser.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\DocumentFormat.OpenXml.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\DocumentFormat.OpenXml.Framework.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\ExcelNumberFormat.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\RBush.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\SixLabors.Fonts.dll
+C:\Users\patri\OneDrive\Documentos\Cine-Temporal\Sistema-Cine\Sistema-Cine\bin\Debug\net9.0\System.IO.Packaging.dll

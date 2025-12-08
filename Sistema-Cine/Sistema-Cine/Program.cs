@@ -22,38 +22,38 @@ builder.Services.AddHttpClient<IWeatherApiService, WeatherApiService>(client =>
     client.BaseAddress = new Uri("https://api.open-meteo.com/v1/");
 });
 
-// 1) Configuração do SQLite (RF11)
+// 4) Configuração do SQLite (RF11)
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite("Data Source=filmes.db"));
 
-// 2) Registro do repositório (RF11)
+// 5) Registro do repositório (RF11)
 builder.Services.AddScoped<IFilmeRepository, FilmeRepository>();
 
-// 3) MVC
+// 6) Registro dos serviços
+builder.Services.AddScoped<IExportService, ExportService>();
+builder.Services.AddScoped<ILogService, LogService>();
+
+// 7) MVC
 builder.Services.AddControllersWithViews();
+
+// ==== TUDO ACIMA É REGISTRO ====
+// ==== DAQUI PARA BAIXO É O PIPELINE ====
 
 var app = builder.Build();
 
-// 4) Criar banco automaticamente
+// 8) Criar banco automaticamente
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.EnsureCreated(); // cria o banco e tabelas se não existirem
+    db.Database.EnsureCreated();
 }
 
-// 5) Configure pipeline
+// 9) Configure pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
-
-// Para as panilhas
-builder.Services.AddScoped<ExportService>();
-
-// Para os logs
-builder.Services.AddScoped<ILogService, LogService>();
-
 
 app.UseHttpsRedirection();
 

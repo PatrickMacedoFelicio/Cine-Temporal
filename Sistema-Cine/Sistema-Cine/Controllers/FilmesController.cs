@@ -175,7 +175,7 @@ namespace Sistema_Cine.Controllers
         public async Task<FileResult> ExportCsv()
         {
             var filmes = (await _repo.ListAsync()).ToList();
-            var bytes = _export.ExportFilmesToCsv(filmes);
+            var bytes = _export.ExportarCsv(filmes);
 
             return File(bytes, "text/csv", "filmes.csv");
         }
@@ -185,7 +185,7 @@ namespace Sistema_Cine.Controllers
         public async Task<FileResult> ExportExcel()
         {
             var filmes = (await _repo.ListAsync()).ToList();
-            var bytes = _export.ExportFilmesToExcel(filmes);
+            var bytes = _export.ExportarExcel(filmes);
 
             return File(bytes,
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
