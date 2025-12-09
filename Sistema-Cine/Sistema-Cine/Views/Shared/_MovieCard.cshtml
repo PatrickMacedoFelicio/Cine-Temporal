@@ -1,0 +1,36 @@
+﻿@model Sistema_Cine.ViewModels.MovieViewModel
+
+<div class="movie-card card mb-3" style="max-width: 540px;">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@(!string.IsNullOrEmpty(Model.PosterFullPath) ? Model.PosterFullPath : Url.Content("~/images/no-poster.png"))"
+                 class="img-fluid rounded-start" alt="@Model.Titulo" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Titulo (@Model.DataLancamento?.Year.ToString() ?? "")</h5>
+                <p class="card-text text-truncate" style="max-height:3.6em;">@Model.Sinopse</p>
+                <p class="card-text small">
+                    <strong>Nota:</strong> @Model.NotaMedia?.ToString("0.0") &nbsp;
+                    <strong>Idioma:</strong> @Model.Lingua
+                </p>
+                <div class="d-flex gap-2">
+                    <a class="btn btn-sm btn-primary" href="@Url.Action("Details", "Movies", new { id = Model.Id, tmdbId = Model.TmdbId })">Detalhes</a>
+
+                    @* Se veio do TMDb e ainda não está no BD local, mostramos botão importar *@
+                    @if (Model.TmdbId.HasValue && Model.Id == 0)
+                    {
+                        <form method="post" asp-controller="Movies" asp-action="Import" class="d-inline">
+                            <input type="hidden" name="tmdbId" value="@Model.TmdbId" />
+                            <button type="submit" class="btn btn-sm btn-success">Importar</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <a class="btn btn-sm btn-secondary" href="@Url.Action("Edit", "Movies", new { id = Model.Id })">Editar</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
