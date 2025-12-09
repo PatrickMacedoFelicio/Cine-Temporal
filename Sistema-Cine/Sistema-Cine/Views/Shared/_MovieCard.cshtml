@@ -1,4 +1,4 @@
-﻿@model MovieViewModel
+﻿@model Sistema_Cine.ViewModels.MovieViewModel
 
 <div class="movie-card card mb-3" style="max-width: 540px;">
     <div class="row g-0">
@@ -15,7 +15,7 @@
                     <strong>Idioma:</strong> @Model.Lingua
                 </p>
                 <div class="d-flex gap-2">
-                    <a class="btn btn-sm btn-primary" href="@Url.Action("Details", "Movies", new { id = Model.Id ?? 0, tmdbId = Model.TmdbId })">Detalhes</a>
+                    <a class="btn btn-sm btn-primary" href="@Url.Action("Details", "Movies", new { id = Model.Id, tmdbId = Model.TmdbId })">Detalhes</a>
 
                     @* Se veio do TMDb e ainda não está no BD local, mostramos botão importar *@
                     @if (Model.TmdbId.HasValue && Model.Id == 0)
