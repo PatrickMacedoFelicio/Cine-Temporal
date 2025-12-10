@@ -58,3 +58,7 @@ publish/
 #   NODE (caso use frontend)
 ############################################
 node_modules/
+
+
+.\Sistema-Cine\obj\
+.\Sistema-Cine\bin\
