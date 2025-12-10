@@ -7,6 +7,7 @@ namespace Sistema_Cine.Controllers
     {
         private readonly ITmdbApiService _tmdbService;
         private readonly IWeatherApiService _weatherService;
+        //
 
         public TesteApiController(ITmdbApiService tmdbService, IWeatherApiService weatherService)
         {
