@@ -1,13 +1,60 @@
-# Default ignored files
+############################################
+#   DOTNET / ASP.NET CORE
+############################################
+bin/
+obj/
+out/
+publish/
+
+# Static Web Assets (evita erros MSB4018)
+**/staticwebassets.build.json
+**/staticwebassets.development.json
+
+############################################
+#   EDITORES / IDE (Rider, VS, VSCode)
+############################################
+
+# Rider
+.idea/
+*.iml
 /shelf/
 /workspace.xml
-# Rider ignored files
 /projectSettingsUpdater.xml
 /modules.xml
-/.idea.Cine-Temporal.iml
+/.idea.*.iml
 /contentModel.xml
+
 # Editor-based HTTP Client requests
 /httpRequests/
+
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VSCode
+.vscode/
+
+############################################
+#   SISTEMA
+############################################
+*.log
+*.tmp
+*.bak
+
+############################################
+#   SQLITE
+############################################
+*.db
+*.db-shm
+*.db-wal
+
+############################################
+#   NODE (caso use frontend)
+############################################
+node_modules/
