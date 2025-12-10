@@ -28,5 +28,26 @@ namespace Sistema_Cine.Controllers
             var resultado = await _weatherService.GetForecastAsync(-23.55, -46.63);
             return Json(resultado);
         }
+        
+        // Filmes em cartaz
+        public async Task<IActionResult> EmCartaz(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetNowPlayingMoviesAsync(pagina);
+            return Json(resultado);
+        }
+
+// Próximos lançamentos
+        public async Task<IActionResult> ProximosLancamentos(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetUpcomingMoviesAsync(pagina);
+            return Json(resultado);
+        }
+
+// Filmes mais bem avaliados
+        public async Task<IActionResult> MaisBemAvaliados(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetTopRatedMoviesAsync(pagina);
+            return Json(resultado);
+        }
     }
 }
