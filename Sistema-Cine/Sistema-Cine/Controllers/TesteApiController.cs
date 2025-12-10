@@ -29,5 +29,14 @@ namespace Sistema_Cine.Controllers
             var resultado = await _weatherService.GetForecastAsync(-23.55, -46.63);
             return Json(resultado);
         }
+        
+        
+// Teste: /TesteApi/FilmesPopulares?pagina=1
+        public async Task<IActionResult> FilmesPopulares(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetPopularMoviesAsync(pagina);
+            return Json(resultado);
+        }
+        
     }
 }

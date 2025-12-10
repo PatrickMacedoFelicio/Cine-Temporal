@@ -7,5 +7,8 @@ namespace Sistema_Cine.Services.Interfaces
         Task<TmdbRespostaBusca> SearchMoviesAsync(string termoBusca, int pagina);
         Task<TmdbDetalhesFilme> GetMovieDetailsAsync(int id);
         Task<TmdbRespostaConfig> GetConfigurationAsync();
+        
+        Task<TmdbRespostaBusca> GetPopularMoviesAsync(int pagina);
+
     }
 }
