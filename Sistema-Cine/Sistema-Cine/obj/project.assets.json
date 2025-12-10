@@ -1400,19 +1400,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\patri\\.nuget\\packages\\": {}
+    "/Users/semeler/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
+      "projectUniqueName": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
       "projectName": "Sistema-Cine",
-      "projectPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
-      "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\patri\\OneDrive\\Documentos\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\obj\\",
+      "projectPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
+      "packagesPath": "/Users/semeler/.nuget/packages/",
+      "outputPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\patri\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/semeler/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -1474,7 +1474,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Users\\patri\\.dotnet\\sdk\\9.0.307/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/Users/semeler/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
