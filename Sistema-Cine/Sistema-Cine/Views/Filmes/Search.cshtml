@@ -1,0 +1,130 @@
+﻿@model Sistema_Cine.ViewModels.SearchViewModel
+@{
+    ViewData["Title"] = "Busca de Filmes no TMDb";
+}
+
+<h1 class="display-4">Busca de Filmes no TMDb</h1>
+<p class="lead">Pesquise filmes usando o The Movie Database e importe para o catálogo local.</p>
+
+<!-- FORMULÁRIO DE BUSCA -->
+<form method="get" asp-action="Search" class="mb-4">
+    <div class="input-group input-group-lg">
+        <input type="text"
+               name="q"
+               class="form-control"
+               placeholder="Digite o título do filme..."
+               value="@Model.Query"
+               required />
+
+        <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i> Pesquisar
+        </button>
+    </div>
+</form>
+
+<!-- NENHUM RESULTADO -->
+@if (!string.IsNullOrEmpty(Model.Query) && !Model.Results.Any())
+{
+    <div class="alert alert-warning text-center mt-4">
+        <h4>Nenhum resultado encontrado para "@Model.Query"</h4>
+    </div>
+}
+
+<!-- RESULTADOS TMDB -->
+@if (Model.Results.Any())
+{
+    <hr />
+    <h3 class="mb-4">Resultados (Página @Model.Page de @Model.TotalPages)</h3>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach (var filme in Model.Results)
+        {
+            <div class="col">
+                @await Html.PartialAsync("_MovieCardSearch", filme)
+            </div>
+        }
+    </div>
+
+    <!-- PAGINAÇÃO -->
+    <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+
+            <!-- ANTERIOR -->
+            <li class="page-item @(Model.Page <= 1 ? "disabled" : "")">
+                <a class="page-link"
+                   href="@Url.Action("Search", new { q = Model.Query, page = Model.Page - 1 })">
+                    Anterior
+                </a>
+            </li>
+
+            @foreach (var i in Enumerable.Range(Math.Max(1, Model.Page - 2), 5))
+            {
+                if (i > 0 && i <= Model.TotalPages)
+                {
+                    <li class="page-item @(i == Model.Page ? "active" : "")">
+                        <a class="page-link"
+                           href="@Url.Action("Search", new { q = Model.Query, page = i })">
+                            @i
+                        </a>
+                    </li>
+                }
+            }
+
+            <!-- PRÓXIMA -->
+            <li class="page-item @(Model.Page >= Model.TotalPages ? "disabled" : "")">
+                <a class="page-link"
+                   href="@Url.Action("Search", new { q = Model.Query, page = Model.Page + 1 })">
+                    Próxima
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+}
+
+<!-- MODAL DETALHES -->
+<div class="modal fade" id="filmeDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content" id="modalContentContainer"></div>
+    </div>
+</div>
+
+@section Scripts {
+
+<script>
+    $(document).on('click', '.js-open-details', function (e) {
+        e.preventDefault();
+
+        const filmeId = $(this).data('id');
+        const url = '@Url.Action("Details", "Movies")/' + filmeId;
+
+        const modal = new bootstrap.Modal(document.getElementById('filmeDetailsModal'));
+        modal.show();
+
+        $("#modalContentContainer").html(`
+            <div class="p-5 text-center">
+                <div class="spinner-border"></div>
+                <p>Carregando detalhes...</p>
+            </div>
+        `);
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            headers: { 'X-Requested-With': 'XMLHttpRequest' },
+            success: function (data) {
+                $("#modalContentContainer").html(data);
+            },
+            error: function () {
+                $("#modalContentContainer").html(`
+                    <div class="modal-body alert alert-danger">
+                        Erro ao carregar detalhes do filme.
+                    </div>
+                `);
+            }
+        });
+    });
+</script>
+
+@await Html.PartialAsync("_ValidationScriptsPartial")
+}

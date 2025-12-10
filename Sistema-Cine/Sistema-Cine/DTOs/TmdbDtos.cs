@@ -13,59 +13,70 @@ namespace Sistema_Cine.DTOs
 
         [JsonPropertyName("total_pages")]
         public int TotalPaginas { get; set; }
+
+        // Campo ausente que gerava erro no Controller
+        [JsonPropertyName("total_results")]
+        public int TotalResultados { get; set; }
     }
 
+
+    // RESUMO DE FILME
     public class TmdbResumoFilme
     {
         [JsonPropertyName("id")]
         public int Id { get; set; }
 
         [JsonPropertyName("title")]
-        public string Titulo { get; set; }
+        public string Titulo { get; set; } = "";
 
         [JsonPropertyName("poster_path")]
-        public string? CaminhoPoster { get; set; } 
+        public string? CaminhoPoster { get; set; }
 
+        // release_date pode vir vazio ou nulo → manter como string?
         [JsonPropertyName("release_date")]
-        public string DataLancamento { get; set; }
+        public string? DataLancamento { get; set; }
     }
 
-    // Detalhes completos (/movie/{id})
-    // Herda do Resumo para reaproveitar ID e Título
+
+    // DETALHES DO FILME
     public class TmdbDetalhesFilme : TmdbResumoFilme
     {
         [JsonPropertyName("overview")]
-        public string Sinopse { get; set; }
+        public string Sinopse { get; set; } = "";
 
+        // O TMDb retorna double, mas seu banco usa decimal? → conversão precisa ser explícita
         [JsonPropertyName("vote_average")]
-        public double NotaMedia { get; set; }
+        public double? NotaMedia { get; set; }
 
         [JsonPropertyName("genres")]
-        public List<Genero> Generos { get; set; }
+        public List<Genero> Generos { get; set; } = new();
 
         [JsonPropertyName("runtime")]
         public int? DuracaoMinutos { get; set; }
     }
 
+
     public class Genero
     {
         [JsonPropertyName("name")]
-        public string Nome { get; set; }
+        public string Nome { get; set; } = "";
     }
 
-    // Configuração para montar URL de imagens (/configuration)
+
+    // CONFIGURAÇÃO DE IMAGENS
     public class TmdbRespostaConfig
     {
         [JsonPropertyName("images")]
-        public TmdbConfigImagens Imagens { get; set; }
+        public TmdbConfigImagens Imagens { get; set; } = new();
     }
+
 
     public class TmdbConfigImagens
     {
         [JsonPropertyName("secure_base_url")]
-        public string UrlBaseSegura { get; set; }
+        public string UrlBaseSegura { get; set; } = "";
 
         [JsonPropertyName("poster_sizes")]
-        public List<string> TamanhosPoster { get; set; }
+        public List<string> TamanhosPoster { get; set; } = new();
     }
 }

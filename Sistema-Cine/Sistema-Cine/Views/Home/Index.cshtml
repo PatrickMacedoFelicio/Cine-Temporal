@@ -1,8 +1,79 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Cine Temporal";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container py-5">
+
+    <!-- HERO -->
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold">Cine Temporal</h1>
+        <p class="lead">
+            Gerencie seu catálogo de filmes, importe títulos do TMDb e visualize detalhes enriquecidos com previsão do tempo.
+        </p>
+    </div>
+
+    <!-- NAVEGAÇÃO PRINCIPAL -->
+    <div class="row g-4 justify-content-center">
+
+        <!-- Catálogo Local -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h4 class="card-title fw-bold">Catálogo Local</h4>
+                    <p class="card-text">
+                        Acesse seus filmes armazenados localmente e visualize detalhes completos via modal.
+                    </p>
+                    <a asp-controller="Movies" asp-action="Index" class="btn btn-primary btn-lg">
+                        Ir para Catálogo
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Busca TMDb -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body text-center">
+                    <h4 class="card-title fw-bold">Buscar no TMDb</h4>
+                    <p class="card-text">
+                        Procure filmes no The Movie Database e importe para seu catálogo local.
+                    </p>
+                    <a asp-controller="Movies" asp-action="Search" class="btn btn-success btn-lg">
+                        Buscar e Importar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EXPORTAÇÕES -->
+    <div class="text-center mt-5">
+        <h3 class="fw-bold">Exportações</h3>
+        <p>Exporte seu catálogo em diferentes formatos.</p>
+
+        <a asp-controller="Movies" asp-action="ExportCsv" class="btn btn-outline-secondary me-2">
+            Exportar CSV
+        </a>
+
+        <a asp-controller="Movies" asp-action="ExportExcel" class="btn btn-outline-success">
+            Exportar Excel
+        </a>
+    </div>
+
+    <hr class="my-5" />
+
+    <!-- DESCRIÇÃO DO SISTEMA -->
+    <div class="mt-4">
+        <h4 class="fw-bold">Funcionalidades</h4>
+
+        <ul class="list-group list-group-flush mt-3">
+            <li class="list-group-item">• Busca de filmes no TMDb com paginação.</li>
+            <li class="list-group-item">• Importação de dados do TMDb para o banco local.</li>
+            <li class="list-group-item">• CRUD completo do catálogo local.</li>
+            <li class="list-group-item">• Exibição de detalhes do filme (via modal), incluindo elenco, poster e avaliação.</li>
+            <li class="list-group-item">• Previsão do tempo via Open-Meteo para a cidade vinculada ao filme.</li>
+            <li class="list-group-item">• Exportação do catálogo em CSV e Excel.</li>
+        </ul>
+    </div>
+
 </div>
