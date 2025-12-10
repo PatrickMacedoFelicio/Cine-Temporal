@@ -1,91 +1,59 @@
 ﻿using ClosedXML.Excel;
 using Sistema_Cine.Models;
+using Sistema_Cine.Services.Interfaces;
 using System.Text;
 
 namespace Sistema_Cine.Services
 {
-    public class ExportService
+    public class ExportService : IExportService
     {
-        // ===========================================================
-        //  EXPORTAR PARA EXCEL (ClosedXML) - JÁ PRONTO
-        // ===========================================================
-        public byte[] ExportFilmesToExcel(List<Filme> filmes)
-        {
-            using var workbook = new XLWorkbook();
-            var worksheet = workbook.Worksheets.Add("Filmes");
-
-            // Cabeçalho
-            worksheet.Cell(1, 1).Value = "ID";
-            worksheet.Cell(1, 2).Value = "Título";
-            worksheet.Cell(1, 3).Value = "Descrição";
-            worksheet.Cell(1, 4).Value = "Cidade";
-            worksheet.Cell(1, 5).Value = "Latitude";
-            worksheet.Cell(1, 6).Value = "Longitude";
-            worksheet.Cell(1, 7).Value = "Data de Importação";
-
-            // Estiliza
-            var headerRange = worksheet.Range("A1:G1");
-            headerRange.Style.Font.Bold = true;
-            headerRange.Style.Fill.BackgroundColor = XLColor.LightGray;
-
-            // Conteúdo
-            int row = 2;
-            foreach (var f in filmes)
-            {
-                worksheet.Cell(row, 1).Value = f.Id;
-                worksheet.Cell(row, 2).Value = f.Titulo;
-                worksheet.Cell(row, 3).Value = f.Descricao;
-                worksheet.Cell(row, 4).Value = f.Cidade;
-                worksheet.Cell(row, 5).Value = f.Latitude;
-                worksheet.Cell(row, 6).Value = f.Longitude;
-                worksheet.Cell(row, 7).Value = f.DataImportacao;
-                row++;
-            }
-
-            worksheet.Columns().AdjustToContents();
-
-            using var stream = new MemoryStream();
-            workbook.SaveAs(stream);
-            return stream.ToArray();
-        }
-
-        // ===========================================================
-        //  EXPORTAR PARA CSV (RF12)
-        // ===========================================================
-        public byte[] ExportFilmesToCsv(List<Filme> filmes)
+        public byte[] ExportarCsv(IEnumerable<Filme> filmes)
         {
             var sb = new StringBuilder();
 
-            // Cabeçalho CSV
-            sb.AppendLine("Id;Titulo;Descricao;Cidade;Latitude;Longitude;DataImportacao");
+            sb.AppendLine("Id;Título;Descrição;Cidade;Latitude;Longitude;DataImportacao");
 
-            // Linhas
             foreach (var f in filmes)
             {
-                sb.AppendLine(
-                    $"{f.Id};" +
-                    $"{EscapeCsv(f.Titulo)};" +
-                    $"{EscapeCsv(f.Descricao)};" +
-                    $"{EscapeCsv(f.Cidade)};" +
-                    $"{f.Latitude};" +
-                    $"{f.Longitude};" +
-                    $"{f.DataImportacao:yyyy-MM-dd HH:mm:ss}"
-                );
+                sb.AppendLine($"{f.Id};{f.Titulo};{f.Descricao};{f.Cidade};{f.Latitude};{f.Longitude};{f.DataImportacao}");
             }
 
             return Encoding.UTF8.GetBytes(sb.ToString());
         }
 
-        // Evita quebra de CSV quando há ; , " ou quebra de linha
-        private string EscapeCsv(string? value)
+        public byte[] ExportarExcel(IEnumerable<Filme> filmes)
         {
-            if (string.IsNullOrEmpty(value))
-                return "";
+            using var workbook = new XLWorkbook();
+            var ws = workbook.Worksheets.Add("Filmes");
 
-            if (value.Contains(';') || value.Contains('"') || value.Contains('\n'))
-                return $"\"{value.Replace("\"", "\"\"")}\"";
+            ws.Cell(1, 1).Value = "ID";
+            ws.Cell(1, 2).Value = "Título";
+            ws.Cell(1, 3).Value = "Descrição";
+            ws.Cell(1, 4).Value = "Cidade";
+            ws.Cell(1, 5).Value = "Latitude";
+            ws.Cell(1, 6).Value = "Longitude";
+            ws.Cell(1, 7).Value = "Data de Importação";
 
-            return value;
+            int row = 2;
+
+            foreach (var f in filmes)
+            {
+                ws.Cell(row, 1).Value = f.Id;
+                ws.Cell(row, 2).Value = f.Titulo;
+                ws.Cell(row, 3).Value = f.Descricao;
+                ws.Cell(row, 4).Value = f.Cidade;
+                ws.Cell(row, 5).Value = f.Latitude;
+                ws.Cell(row, 6).Value = f.Longitude;
+                ws.Cell(row, 7).Value = f.DataImportacao;
+
+                row++;
+            }
+
+            ws.Columns().AdjustToContents();
+
+            using var ms = new MemoryStream();
+            workbook.SaveAs(ms);
+            return ms.ToArray();
         }
     }
 }
