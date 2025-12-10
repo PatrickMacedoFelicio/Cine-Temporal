@@ -1,0 +1,44 @@
+﻿@model Sistema_Cine.ViewModels.FilmeViewModel
+
+<div class="card shadow-sm h-100">
+
+    <!-- POSTER -->
+    <img src="@Model.PosterUrl"
+         class="card-img-top"
+         alt="Poster de @Model.Titulo" />
+
+    <div class="card-body">
+
+        <h5 class="card-title">@Model.Titulo</h5>
+        <p class="text-muted">@Model.DataLancamento?.ToString("yyyy")</p>
+
+        @if (!string.IsNullOrEmpty(Model.Sinopse))
+        {
+            <p class="card-text text-truncate">@Model.Sinopse</p>
+        }
+
+        <div class="d-grid gap-2 mt-3">
+
+            <!-- DETAILS MODAL -->
+            <button class="btn btn-primary js-open-details"
+                    data-id="@Model.Id">
+                <i class="bi bi-info-circle"></i> Detalhes
+            </button>
+
+            <!-- EDITAR -->
+            <a asp-controller="Movies"
+               asp-action="Edit"
+               asp-route-id="@Model.Id"
+               class="btn btn-warning">
+                <i class="bi bi-pencil"></i> Editar
+            </a>
+
+            <!-- EXCLUIR (MODAL) -->
+            <button class="btn btn-danger js-open-delete"
+                    data-id="@Model.Id">
+                <i class="bi bi-trash"></i> Excluir
+            </button>
+
+        </div>
+    </div>
+</div>

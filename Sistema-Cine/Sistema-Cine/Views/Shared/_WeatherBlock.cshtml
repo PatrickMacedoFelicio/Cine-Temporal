@@ -1,26 +1,35 @@
 ﻿@model IEnumerable<Sistema_Cine.ViewModels.WeatherDayViewModel>
 
-@* WeatherDayViewModel:
-public class WeatherDayViewModel { public DateTime Date {get;set;} public double TempMin {get;set;} public double TempMax {get;set;} }
-*@
-
 @if (Model == null || !Model.Any())
 {
-    <div class="alert alert-info">Previsão indisponível. Preencha latitude/longitude para ver a previsão.</div>
+    <div class="alert alert-info">
+        Nenhuma previsão disponível.
+    </div>
 }
 else
 {
-    <div class="weather-block card p-2">
-        <h6>Previsão (diária)</h6>
-        <div class="d-flex gap-2 flex-wrap">
-            @foreach (var day in Model)
-            {
-                <div class="weather-day card p-2" style="min-width:140px;">
-                    <div class="small text-muted">@day.Date.ToString("dd MMM yyyy")</div>
-                    <div><strong>Mín:</strong> @Math.Round(day.TempMin) °C</div>
-                    <div><strong>Máx:</strong> @Math.Round(day.TempMax) °C</div>
+    <div class="row g-3">
+        @foreach (var dia in Model)
+        {
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <h6 class="fw-bold">
+                        @dia.Date.ToString("dd/MM/yyyy")
+                    </h6>
+
+                    <p class="mb-1">
+                        <strong>Mínima:</strong> @dia.TempMin°C
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Máxima:</strong> @dia.TempMax°C
+                    </p>
+
+                    <p class="mt-2 text-muted small">
+                        @dia.Description
+                    </p>
                 </div>
-            }
-        </div>
+            </div>
+        }
     </div>
 }
