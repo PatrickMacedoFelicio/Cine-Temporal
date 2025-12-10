@@ -58,3 +58,11 @@ publish/
 #   NODE (caso use frontend)
 ############################################
 node_modules/
+
+
+.\Sistema-Cine\obj\
+.\Sistema-Cine\bin\
+
+Sistema-Cine/Sistema-Cine/obj/Debug/net9.0/Sistema-Cine.AssemblyInfo.cs
+Sistema-Cine/Sistema-Cine/obj/Debug/net9.0/Sistema-Cine.AssemblyInfoInputs.cache
+Sistema-Cine/Sistema-Cine/obj/rider.project.model.nuget.info
