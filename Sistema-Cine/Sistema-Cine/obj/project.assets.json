@@ -1187,5 +1187,13 @@
         "runtimeIdentifierGraphPath": "/Users/semeler/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file /Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/obj/project.nuget.cache : '<' is an invalid start of a property name. Expected a '\"'. Path: $ | LineNumber: 2 | BytePositionInLine: 0."
+    }
+  ]
 }
