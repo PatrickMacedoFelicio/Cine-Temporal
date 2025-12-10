@@ -8,6 +8,6 @@ namespace Sistema_Cine.ViewModels
         public int Page { get; set; }
         public int TotalPages { get; set; }
         
-        public IEnumerable<MovieViewModel> Results { get; set; }
+        public IEnumerable<FilmeViewModel> Results { get; set; }
     }
 }

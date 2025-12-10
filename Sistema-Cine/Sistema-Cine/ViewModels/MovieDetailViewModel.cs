@@ -4,7 +4,7 @@ namespace Sistema_Cine.ViewModels
 {
     public class MovieDetailViewModel
     {
-        public MovieViewModel Movie { get; set; }
+        public FilmeViewModel Filme { get; set; }
         public IEnumerable<WeatherDayViewModel> Forecast { get; set; }
     }
 }
