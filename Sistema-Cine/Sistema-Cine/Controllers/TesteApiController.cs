@@ -21,22 +21,6 @@ namespace Sistema_Cine.Controllers
             var resultado = await _tmdbService.SearchMoviesAsync(termo, 1);
             return Json(resultado);
         }
-
-        // Teste: /TesteApi/Clima
-        public async Task<IActionResult> Clima()
-        {
-            // Teste com coordenadas de São Paulo
-            var resultado = await _weatherService.GetForecastAsync(-23.55, -46.63);
-            return Json(resultado);
-        }
-        
-        
-// Teste: /TesteApi/FilmesPopulares?pagina=1
-        public async Task<IActionResult> FilmesPopulares(int pagina = 1)
-        {
-            var resultado = await _tmdbService.GetPopularMoviesAsync(pagina);
-            return Json(resultado);
-        }
-        
+      
     }
 }
