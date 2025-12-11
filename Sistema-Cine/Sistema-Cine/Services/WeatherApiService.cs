@@ -1,6 +1,7 @@
 using Microsoft.Extensions.Caching.Memory;
 using Sistema_Cine.DTOs;
 using Sistema_Cine.Services.Interfaces;
+using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -18,62 +19,53 @@ namespace Sistema_Cine.Services
             _cache = cache;
             _logger = logger;
         }
-        
-       
-        public async Task<WeatherResposta> GetForecastAsync(double latitude, double longitude)
+
+        public async Task<WeatherResposta?> GetForecastAsync(double latitude, double longitude)
         {
             string chaveCache = $"clima_{latitude}_{longitude}";
 
-            if (_cache.TryGetValue(chaveCache, out WeatherResposta cached)) return cached;
+            if (_cache.TryGetValue(chaveCache, out WeatherResposta cached))
+                return cached;
 
-            _logger.LogInformation($"[API Clima] Buscando previsão Lat:{latitude} Lon:{longitude}");
+            // IMPORTANTÍSSIMO: força "." como separador decimal
+            string lat = latitude.ToString(CultureInfo.InvariantCulture);
+            string lon = longitude.ToString(CultureInfo.InvariantCulture);
 
-            string url = $"forecast?latitude={latitude}&longitude={longitude}&daily=temperature_2m_max,temperature_2m_min&timezone=auto";
+            string url =
+                $"forecast?latitude={lat}" +
+                $"&longitude={lon}" +
+                $"&daily=temperature_2m_max,temperature_2m_min" +
+                $"&timezone=auto";
 
-            try 
+            _logger.LogInformation($"[WEATHER API] Chamando: {_httpClient.BaseAddress}{url}");
+
+            try
             {
                 var resposta = await _httpClient.GetAsync(url);
                 resposta.EnsureSuccessStatusCode();
 
-                var jsonString = await resposta.Content.ReadAsStringAsync();
-                _logger.LogInformation($"[API Clima] URL: {_httpClient.BaseAddress}{url}");
+                var json = await resposta.Content.ReadAsStringAsync();
 
                 var options = new JsonSerializerOptions
                 {
-                    PropertyNameCaseInsensitive = true,
-                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull
+                    PropertyNameCaseInsensitive = true
                 };
 
-                // Deserializa como array e pega o primeiro resultado
-                var resultados = JsonSerializer.Deserialize<WeatherResposta[]>(jsonString, options);
-        
-                if (resultados == null || resultados.Length == 0)
-                {
-                    throw new Exception("Nenhum resultado retornado pela API");
-                }
+                // A Open-Meteo RETORNA UM OBJETO, NÃO ARRAY!
+                var resultado = JsonSerializer.Deserialize<WeatherResposta>(json, options);
 
-                var resultado = resultados[0]; // Pega o primeiro resultado
+                if (resultado == null)
+                    throw new Exception("JSON retornado pela API é nulo.");
+
                 _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(10));
+
                 return resultado;
-            }
-            catch (HttpRequestException ex)
-            {
-                _logger.LogError($"Erro na requisição HTTP: {ex.Message}");
-                throw;
-            }
-            catch (JsonException ex)
-            {
-                _logger.LogError($"Erro ao deserializar JSON: {ex.Message}");
-                _logger.LogError($"Path: {ex.Path}, LineNumber: {ex.LineNumber}");
-                throw;
             }
             catch (Exception ex)
             {
-                _logger.LogError($"Erro não esperado: {ex.Message}");
+                _logger.LogError(ex, $"Erro ao consultar previsão do tempo para {latitude},{longitude}");
                 throw;
             }
         }
-        
-
     }
 }

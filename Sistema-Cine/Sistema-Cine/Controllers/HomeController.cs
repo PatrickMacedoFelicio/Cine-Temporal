@@ -1,31 +1,35 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Sistema_Cine.Models;
+using Sistema_Cine.Services.Interfaces;
+using Sistema_Cine.ViewModels;
 
-namespace Sistema_Cine.Controllers;
-
-public class HomeController : Controller
+namespace Sistema_Cine.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class HomeController : Controller
     {
-        _logger = logger;
-    }
+        private readonly IWeatherApiService _weatherService;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public HomeController(IWeatherApiService weatherService)
+        {
+            _weatherService = weatherService;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        public async Task<IActionResult> Index()
+        {
+            // São Paulo como exemplo
+            double lat = -23.5505;
+            double lon = -46.6333;
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            var clima = await _weatherService.GetForecastAsync(lat, lon);
+
+            var vm = new WeatherHomeViewModel
+            {
+                Cidade = "São Paulo",
+                TemperaturaMinima = clima.Diario?.TemperaturaMinima?.FirstOrDefault(),
+                TemperaturaMaxima = clima.Diario?.TemperaturaMaxima?.FirstOrDefault(),
+                Data = clima.Diario?.Datas?.FirstOrDefault()
+            };
+
+            return View(vm);
+        }
     }
 }
