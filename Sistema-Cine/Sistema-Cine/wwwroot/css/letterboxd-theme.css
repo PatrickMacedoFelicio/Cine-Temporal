@@ -1,0 +1,109 @@
+﻿:root {
+    --lbxd-bg: #14181C;
+    --lbxd-bg-alt: #1E252F;
+    --lbxd-text: #9AB;
+    --lbxd-white: #fff;
+
+    --lbxd-green: #00E054;
+    --lbxd-orange: #FF8000;
+    --lbxd-blue: #40BCF4;
+
+    --lbxd-card-bg: #1E252F;
+    --lbxd-border: #2C3440;
+}
+
+/* Body global */
+body {
+    background-color: var(--lbxd-bg);
+    color: var(--lbxd-text);
+}
+
+/* Header */
+.navbar {
+    background-color: var(--lbxd-bg-alt) !important;
+    border-bottom: 1px solid var(--lbxd-border);
+}
+
+.navbar-brand {
+    color: var(--lbxd-green) !important;
+    font-weight: 700;
+    font-size: 1.4rem;
+}
+
+/* Links */
+a {
+    color: var(--lbxd-blue);
+}
+a:hover {
+    color: var(--lbxd-green);
+}
+
+/* Cards de filme */
+.card {
+    background-color: var(--lbxd-card-bg);
+    border: 1px solid var(--lbxd-border);
+    color: var(--lbxd-white);
+}
+
+.card-title {
+    color: var(--lbxd-white);
+}
+
+.card-text, .text-muted {
+    color: var(--lbxd-text) !important;
+}
+
+/* Botões personalizados */
+.btn-primary {
+    background-color: var(--lbxd-blue);
+    border-color: var(--lbxd-blue);
+}
+.btn-primary:hover {
+    background-color: var(--lbxd-green);
+    border-color: var(--lbxd-green);
+}
+
+.btn-warning {
+    background-color: var(--lbxd-orange);
+    border-color: var(--lbxd-orange);
+}
+.btn-warning:hover {
+    opacity: .8;
+}
+
+.btn-danger {
+    background-color: #d9534f;
+    border-color: #d9534f;
+}
+
+.btn-success {
+    background-color: var(--lbxd-green);
+    border-color: var(--lbxd-green);
+}
+
+.btn-outline-primary {
+    border-color: var(--lbxd-blue);
+    color: var(--lbxd-blue);
+}
+.btn-outline-primary:hover {
+    background-color: var(--lbxd-blue);
+    color: var(--lbxd-white);
+}
+
+/* Campos de formulário */
+.form-control {
+    background-color: var(--lbxd-bg-alt);
+    border: 1px solid var(--lbxd-border);
+    color: var(--lbxd-white);
+}
+.form-control:focus {
+    border-color: var(--lbxd-blue);
+    box-shadow: none;
+}
+
+/* Modal */
+.modal-content {
+    background-color: var(--lbxd-card-bg);
+    border: 1px solid var(--lbxd-border);
+    color: var(--lbxd-white);
+}

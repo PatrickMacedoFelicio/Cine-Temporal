@@ -32,3 +32,101 @@ body {
 
 .movie-card .card-body { padding: 0.6rem; }
 .weather-day { background: #f8f9fa; border-radius: 6px; padding: 0.6rem; }
+
+
+/* WEATHER BOX - Estilo letterboxd */
+.weather-box {
+  background: #1c1c1c;
+  border-radius: 12px;
+  padding: 20px;
+  color: #eee;
+  border: 1px solid #333;
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.weather-box:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(0, 255, 170, 0.15);
+}
+
+/* Header */
+.weather-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+.weather-city {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #00d474;
+}
+
+.weather-date {
+  font-size: .9rem;
+  color: #aaa;
+}
+
+/* Valores */
+.weather-values {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.weather-value {
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  width: 40%;
+}
+
+.weather-value.min {
+  background: rgba(0, 140, 255, 0.15);
+  border: 1px solid rgba(0, 140, 255, 0.2);
+}
+
+.weather-value.max {
+  background: rgba(255, 120, 0, 0.15);
+  border: 1px solid rgba(255, 120, 0, 0.2);
+}
+
+.weather-value .label {
+  display: block;
+  font-size: .8rem;
+  color: #ccc;
+}
+
+.weather-value .temp {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-top: 5px;
+  color: #fff;
+}
+/* Ícones do clima */
+.weather-icon {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 6px;
+  opacity: 0.9;
+}
+
+/* Glow por tipo */
+.weather-value.min .weather-icon {
+  color: #3aa7ff;
+  text-shadow: 0 0 12px rgba(0, 140, 255, 0.55);
+}
+
+.weather-value.max .weather-icon {
+  color: #ff8c37;
+  text-shadow: 0 0 12px rgba(255, 120, 0, 0.55);
+}
+
+/* Header icons */
+.weather-city i,
+.weather-date i {
+  color: #00d474;
+  text-shadow: 0 0 10px rgba(0, 255, 170, 0.4);
+}

@@ -2,6 +2,12 @@
     ViewData["Title"] = "Cine Temporal";
 }
 
+@model Sistema_Cine.ViewModels.WeatherHomeViewModel
+
+<div class="container mt-4">
+    @await Html.PartialAsync("_WeatherHome", Model)
+</div>
+
 <div class="container py-5">
 
     <!-- HERO -->
@@ -59,8 +65,6 @@
             Exportar Excel
         </a>
     </div>
-
-    <hr class="my-5" />
     
 
 </div>

@@ -61,8 +61,7 @@ C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\scopedcss\bundle\Sistema-Cine.styles.css
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\scopedcss\projectbundle\Sistema-Cine.bundle.scp.css
-C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\7hlh4yg63o-2a18lw5ga3.gz
-C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\99fobklikz-ntg8ieblfw.gz
+C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\52nzx3bq5k-mjg88jfsjf.gz
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\86zvckqfnf-v34twjb2ly.gz
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\ygdbc5czjy-znfjkdv12y.gz
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\2ala5hof3h-xtxxf3hu2r.gz
@@ -137,3 +136,4 @@ C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\Sistema-Cine.pdb
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\Sistema-Cine.genruntimeconfig.cache
 C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\ref\Sistema-Cine.dll
+C:\Users\samuel.felipe\Documents\GitHub\Cine-Temporal\Sistema-Cine\Sistema-Cine\obj\Debug\net9.0\compressed\7hlh4yg63o-7x7my542xn.gz
