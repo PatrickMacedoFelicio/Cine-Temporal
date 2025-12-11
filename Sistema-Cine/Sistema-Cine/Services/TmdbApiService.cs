@@ -56,7 +56,39 @@ namespace Sistema_Cine.Services
                 throw; // Repassa o erro para o Controller tratar
             }
         }
+        
+        
+        public async Task<TmdbRespostaBusca> GetPopularMoviesAsync(int pagina)
+        {
+            string chaveCache = $"filmes_populares_pagina_{pagina}";
+    
+            if (_cache.TryGetValue(chaveCache, out TmdbRespostaBusca resultadoCache))
+            {
+                _logger.LogInformation($"[CACHE] Filmes populares recuperados da página {pagina}");
+                return resultadoCache;
+            }
 
+            try
+            {
+                _logger.LogInformation($"[API TMDb] Buscando filmes populares, Página: {pagina}");
+
+                var resposta = await _httpClient.GetAsync($"movie/popular?api_key={_apiKey}&page={pagina}&language=pt-BR");
+                resposta.EnsureSuccessStatusCode();
+
+                var conteudo = await resposta.Content.ReadAsStringAsync();
+                var resultado = JsonSerializer.Deserialize<TmdbRespostaBusca>(conteudo);
+
+                _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(5));
+
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erro ao buscar filmes populares na página {pagina}");
+                throw;
+            }
+        }
+        
         public async Task<TmdbDetalhesFilme> GetMovieDetailsAsync(int id)
         {
             string chaveCache = $"filme_detalhes_{id}";
