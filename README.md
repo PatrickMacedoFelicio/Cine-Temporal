@@ -1,3 +1,9 @@
+**Trabalho feito por:**
+Patrick Macêdo Felicio
+Lucas Freire Sêmeler
+Samuel Felipe Cardoso Leite
+
+
 🎞️ Cine Temporal
 
 Aplicação ASP.NET Core MVC para catálogo, gerenciamento e enriquecimento de filmes com dados do TMDb e clima por geolocalização.
