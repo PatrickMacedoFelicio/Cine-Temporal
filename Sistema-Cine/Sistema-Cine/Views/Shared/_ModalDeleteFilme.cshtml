@@ -1,23 +1,31 @@
 ﻿@model Sistema_Cine.ViewModels.FilmeViewModel
 
-<div class="modal-header">
-    <h5 class="modal-title">Excluir Filme</h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+<div class="modal fade" id="modalDeleteFilme" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
 
-<div class="modal-body">
-    Tem certeza que deseja excluir o filme
-    <strong>@Model.Titulo</strong> ?
-</div>
+            <div class="modal-header">
+                <h5 class="modal-title">Excluir Filme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-<div class="modal-footer">
-    <form asp-action="DeleteConfirmed" asp-controller="Movies" method="post">
-        <input type="hidden" name="id" value="@Model.Id" />
+            <div class="modal-body">
+                Tem certeza que deseja excluir o filme 
+                <strong>@Model.Titulo</strong> ?
+            </div>
 
-        <button type="submit" class="btn btn-danger">Excluir</button>
-    </form>
+            <div class="modal-footer">
+                <form asp-action="DeleteConfirmed" asp-controller="Movies" method="post">
+                    <input type="hidden" name="id" value="@Model.Id" />
 
-    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-        Cancelar
-    </button>
+                    <button type="submit" class="btn btn-danger">Excluir</button>
+                </form>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Cancelar
+                </button>
+            </div>
+
+        </div>
+    </div>
 </div>

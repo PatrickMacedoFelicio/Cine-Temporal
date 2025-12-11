@@ -1400,24 +1400,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/semeler/.nuget/packages/": {}
+    "C:\\Users\\samuel.felipe\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
+      "projectUniqueName": "C:\\Users\\samuel.felipe\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
       "projectName": "Sistema-Cine",
-      "projectPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/Sistema-Cine.csproj",
-      "packagesPath": "/Users/semeler/.nuget/packages/",
-      "outputPath": "/Users/semeler/Documents/GitHub/Cine-Temporal/Sistema-Cine/Sistema-Cine/obj/",
+      "projectPath": "C:\\Users\\samuel.felipe\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\Sistema-Cine.csproj",
+      "packagesPath": "C:\\Users\\samuel.felipe\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\samuel.felipe\\Documents\\GitHub\\Cine-Temporal\\Sistema-Cine\\Sistema-Cine\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/semeler/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\samuel.felipe\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -1474,7 +1476,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/Users/semeler/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.308/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
