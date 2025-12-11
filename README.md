@@ -1,6 +1,9 @@
 **Trabalho feito por:**
+
 Patrick Macêdo Felicio
+
 Lucas Freire Sêmeler
+
 Samuel Felipe Cardoso Leite
 
 
