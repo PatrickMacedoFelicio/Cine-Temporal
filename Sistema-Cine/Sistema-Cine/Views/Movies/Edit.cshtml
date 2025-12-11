@@ -1,0 +1,89 @@
+﻿@model Sistema_Cine.ViewModels.FilmeViewModel 
+@{
+    ViewData["Title"] = "Editar Filme: " + Model.Titulo;
+}
+
+<h1 class="display-4">Editar Filme: @Model.Titulo</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <p class="lead text-muted">Dados principais</p>
+
+            <!-- Título -->
+            <div class="form-group mb-3">
+                <label asp-for="Titulo"></label>
+                <input asp-for="Titulo" class="form-control" />
+                <span asp-validation-for="Titulo" class="text-danger"></span>
+            </div>
+
+            <!-- Sinopse -->
+            <div class="form-group mb-3">
+                <label asp-for="Sinopse"></label>
+                <textarea asp-for="Sinopse" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Sinopse" class="text-danger"></span>
+            </div>
+
+            <!-- Data, duração e gênero -->
+            <div class="row">
+                <div class="col-md-4 form-group mb-3">
+                    <label asp-for="DataLancamento"></label>
+                    <input asp-for="DataLancamento" type="date" class="form-control" />
+                    <span asp-validation-for="DataLancamento" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                    <label asp-for="Duracao"></label>
+                    <input asp-for="Duracao" type="number" class="form-control" />
+                    <span asp-validation-for="Duracao" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-4 form-group mb-3">
+                    <label asp-for="Genero"></label>
+                    <input asp-for="Genero" class="form-control" />
+                    <span asp-validation-for="Genero" class="text-danger"></span>
+                </div>
+            </div>
+
+            <h3 class="mt-4">Dados de Localização (Previsão do Tempo)</h3>
+
+            <!-- Cidade -->
+            <div class="form-group mb-3">
+                <label asp-for="CidadeReferencia"></label>
+                <input asp-for="CidadeReferencia" class="form-control" />
+                <span asp-validation-for="CidadeReferencia" class="text-danger"></span>
+            </div>
+
+            <!-- Latitude / Longitude -->
+            <div class="row">
+                <div class="col-md-6 form-group mb-3">
+                    <label asp-for="Latitude"></label>
+                    <input asp-for="Latitude" type="number" step="any" class="form-control" />
+                    <span asp-validation-for="Latitude" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 form-group mb-3">
+                    <label asp-for="Longitude"></label>
+                    <input asp-for="Longitude" type="number" step="any" class="form-control" />
+                    <span asp-validation-for="Longitude" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-4 d-grid gap-2">
+                <input type="submit" value="Salvar Alterações" class="btn btn-warning btn-lg" />
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancelar e Voltar</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

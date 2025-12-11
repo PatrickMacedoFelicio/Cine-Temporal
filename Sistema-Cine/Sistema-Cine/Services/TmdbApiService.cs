@@ -109,6 +109,126 @@ namespace Sistema_Cine.Services
             
             return resultado;
         }
+        
+        
+        public async Task<TmdbRespostaBusca> GetPopularMoviesAsync(int pagina = 1)
+        {
+            string chaveCache = $"filmes_populares_pagina_{pagina}";
+    
+            if (_cache.TryGetValue(chaveCache, out TmdbRespostaBusca resultadoCache))
+            {
+                _logger.LogInformation($"[CACHE] Filmes populares recuperados da página: {pagina}");
+                return resultadoCache;
+            }
+
+            try
+            {
+                _logger.LogInformation($"[API TMDb] Buscando filmes populares, Página: {pagina}");
+
+                var resposta = await _httpClient.GetAsync($"movie/popular?api_key={_apiKey}&page={pagina}&language=pt-BR");
+                resposta.EnsureSuccessStatusCode();
+
+                var conteudo = await resposta.Content.ReadAsStringAsync();
+                var resultado = JsonSerializer.Deserialize<TmdbRespostaBusca>(conteudo);
+
+                _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(5));
+
+                return resultado;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, $"Erro ao buscar filmes populares no TMDb");
+                throw;
+            }
+        }
+        
+        
+// Filmes em cartaz nos cinemas
+public async Task<TmdbRespostaBusca> GetNowPlayingMoviesAsync(int pagina = 1)
+{
+    string chaveCache = $"filmes_em_cartaz_pagina_{pagina}";
+    
+    if (_cache.TryGetValue(chaveCache, out TmdbRespostaBusca resultadoCache))
+    {
+        _logger.LogInformation($"[CACHE] Filmes em cartaz recuperados da página: {pagina}");
+        return resultadoCache;
+    }
+
+    try
+    {
+        var resposta = await _httpClient.GetAsync($"movie/now_playing?api_key={_apiKey}&page={pagina}&language=pt-BR");
+        resposta.EnsureSuccessStatusCode();
+
+        var resultado = JsonSerializer.Deserialize<TmdbRespostaBusca>(
+            await resposta.Content.ReadAsStringAsync());
+
+        _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(5));
+        return resultado;
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Erro ao buscar filmes em cartaz no TMDb");
+        throw;
+    }
+}
+
+// Próximos lançamentos
+public async Task<TmdbRespostaBusca> GetUpcomingMoviesAsync(int pagina = 1)
+{
+    string chaveCache = $"proximos_lancamentos_pagina_{pagina}";
+    
+    if (_cache.TryGetValue(chaveCache, out TmdbRespostaBusca resultadoCache))
+    {
+        _logger.LogInformation($"[CACHE] Próximos lançamentos recuperados da página: {pagina}");
+        return resultadoCache;
+    }
+
+    try
+    {
+        var resposta = await _httpClient.GetAsync($"movie/upcoming?api_key={_apiKey}&page={pagina}&language=pt-BR");
+        resposta.EnsureSuccessStatusCode();
+
+        var resultado = JsonSerializer.Deserialize<TmdbRespostaBusca>(
+            await resposta.Content.ReadAsStringAsync());
+
+        _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(5));
+        return resultado;
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Erro ao buscar próximos lançamentos no TMDb");
+        throw;
+    }
+}
+
+// Filmes mais bem avaliados
+public async Task<TmdbRespostaBusca> GetTopRatedMoviesAsync(int pagina = 1)
+{
+    string chaveCache = $"filmes_top_rated_pagina_{pagina}";
+    
+    if (_cache.TryGetValue(chaveCache, out TmdbRespostaBusca resultadoCache))
+    {
+        _logger.LogInformation($"[CACHE] Filmes mais bem avaliados recuperados da página: {pagina}");
+        return resultadoCache;
+    }
+
+    try
+    {
+        var resposta = await _httpClient.GetAsync($"movie/top_rated?api_key={_apiKey}&page={pagina}&language=pt-BR");
+        resposta.EnsureSuccessStatusCode();
+
+        var resultado = JsonSerializer.Deserialize<TmdbRespostaBusca>(
+            await resposta.Content.ReadAsStringAsync());
+
+        _cache.Set(chaveCache, resultado, TimeSpan.FromMinutes(5));
+        return resultado;
+    }
+    catch (Exception ex)
+    {
+        _logger.LogError(ex, "Erro ao buscar filmes mais bem avaliados no TMDb");
+        throw;
+    }
+}
 
         public async Task<TmdbRespostaConfig> GetConfigurationAsync()
         {

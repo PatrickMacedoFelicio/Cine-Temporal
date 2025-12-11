@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Sistema_Cine.ViewModels.WeatherDayViewModel>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        Nenhuma previsão disponível.
+    </div>
+}
+else
+{
+    <div class="row g-3">
+        @foreach (var dia in Model)
+        {
+            <div class="col-md-6">
+                <div class="card p-3 shadow-sm">
+                    <h6 class="fw-bold">
+                        @dia.Date.ToString("dd/MM/yyyy")
+                    </h6>
+
+                    <p class="mb-1">
+                        <strong>Mínima:</strong> @dia.TempMin°C
+                    </p>
+
+                    <p class="mb-1">
+                        <strong>Máxima:</strong> @dia.TempMax°C
+                    </p>
+
+                    <p class="mt-2 text-muted small">
+                        @dia.Description
+                    </p>
+                </div>
+            </div>
+        }
+    </div>
+}
