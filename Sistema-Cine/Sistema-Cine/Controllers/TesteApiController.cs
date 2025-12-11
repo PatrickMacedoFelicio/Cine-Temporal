@@ -7,7 +7,6 @@ namespace Sistema_Cine.Controllers
     {
         private readonly ITmdbApiService _tmdbService;
         private readonly IWeatherApiService _weatherService;
-        //
 
         public TesteApiController(ITmdbApiService tmdbService, IWeatherApiService weatherService)
         {
@@ -21,6 +20,34 @@ namespace Sistema_Cine.Controllers
             var resultado = await _tmdbService.SearchMoviesAsync(termo, 1);
             return Json(resultado);
         }
-      
+
+        // Teste: /TesteApi/Clima
+        public async Task<IActionResult> Clima()
+        {
+            // Teste com coordenadas de São Paulo
+            var resultado = await _weatherService.GetForecastAsync(-23.55, -46.63);
+            return Json(resultado);
+        }
+        
+        // Filmes em cartaz
+        public async Task<IActionResult> EmCartaz(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetNowPlayingMoviesAsync(pagina);
+            return Json(resultado);
+        }
+
+// Próximos lançamentos
+        public async Task<IActionResult> ProximosLancamentos(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetUpcomingMoviesAsync(pagina);
+            return Json(resultado);
+        }
+
+// Filmes mais bem avaliados
+        public async Task<IActionResult> MaisBemAvaliados(int pagina = 1)
+        {
+            var resultado = await _tmdbService.GetTopRatedMoviesAsync(pagina);
+            return Json(resultado);
+        }
     }
 }
