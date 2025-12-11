@@ -1,59 +1,70 @@
 ﻿@model Sistema_Cine.ViewModels.MovieDetailViewModel
 
-<div class="modal-header">
-    <h5 class="modal-title">
-        @Model.Filme.Titulo 
-        (@Model.Filme.DataLancamento?.ToString("yyyy"))
-    </h5>
-    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-</div>
+<div class="modal fade" id="modalMovieDetails" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
 
-<div class="modal-body">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    @Model.Filme.Titulo
+                    (@Model.Filme.DataLancamento?.ToString("yyyy"))
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
 
-    <div class="row">
-        <!-- POSTER -->
-        <div class="col-md-4 mb-3">
-            <img src="@Model.Filme.PosterUrl"
-                 alt="Poster"
-                 class="img-fluid rounded shadow-sm" />
-        </div>
+            <div class="modal-body">
 
-        <!-- INFOS -->
-        <div class="col-md-8">
+                <div class="row">
 
-            <h5>Sinopse</h5>
-            <p>@Model.Filme.Sinopse</p>
+                    <!-- POSTER -->
+                    <div class="col-md-4 mb-3">
+                        <img src="@Model.Filme.PosterUrl"
+                             alt="Poster"
+                             class="img-fluid rounded shadow-sm" />
+                    </div>
 
-            <h5>Elenco Principal</h5>
-            <p>@Model.Filme.ElencoPrincipal</p>
+                    <!-- INFOS -->
+                    <div class="col-md-8">
 
-            <h5>Informações</h5>
-            <ul>
-                <li><strong>Título Original:</strong> @Model.Filme.TituloOriginal</li>
-                <li><strong>Idioma:</strong> @Model.Filme.Lingua</li>
-                <li><strong>Duração:</strong> @Model.Filme.Duracao min</li>
-                <li><strong>Avaliação Média:</strong> @Model.Filme.NotaMedia</li>
-            </ul>
+                        <h5>Sinopse</h5>
+                        <p>@Model.Filme.Sinopse</p>
 
-            <hr />
+                        <h5>Elenco Principal</h5>
+                        <p>@Model.Filme.ElencoPrincipal</p>
 
-            <!-- CLIMA -->
-            @if (Model.HasCoordinates)
-            {
-                <h5>Previsão do Tempo</h5>
-                @await Html.PartialAsync("_WeatherBlock", Model.Forecast)
-            }
-            else
-            {
-                <div class="alert alert-warning">
-                    Este filme não possui latitude e longitude definidas.<br />
-                    Para visualizar o clima, edite o filme e informe esses dados.
+                        <h5>Informações</h5>
+                        <ul>
+                            <li><strong>Título Original:</strong> @Model.Filme.TituloOriginal</li>
+                            <li><strong>Idioma:</strong> @Model.Filme.Lingua</li>
+                            <li><strong>Duração:</strong> @Model.Filme.Duracao min</li>
+                            <li><strong>Avaliação Média:</strong> @Model.Filme.NotaMedia</li>
+                        </ul>
+
+                        <hr />
+
+                        @if (Model.HasCoordinates)
+                        {
+                            <h5>Previsão do Tempo</h5>
+                            @await Html.PartialAsync("_WeatherBlock", Model.Forecast)
+                        }
+                        else
+                        {
+                            <div class="alert alert-warning">
+                                Este filme não possui latitude e longitude definidas.<br />
+                                Para visualizar o clima, edite o filme e informe esses dados.
+                            </div>
+                        }
+
+                    </div>
+
                 </div>
-            }
+
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+
         </div>
     </div>
-</div>
-
-<div class="modal-footer">
-    <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
 </div>

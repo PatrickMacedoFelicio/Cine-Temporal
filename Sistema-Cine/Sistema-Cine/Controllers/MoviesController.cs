@@ -25,9 +25,10 @@ namespace Sistema_Cine.Controllers
             _export = export;
         }
 
-        // ------------------------------------------------------------
-        // MAP → MODEL
-        // ------------------------------------------------------------
+        // =====================================================================
+        // MAPS
+        // =====================================================================
+
         private Filme MapToModel(FilmeViewModel vm)
         {
             return new Filme
@@ -41,10 +42,12 @@ namespace Sistema_Cine.Controllers
                 Genero = vm.Genero,
                 Lingua = vm.Lingua,
                 Duracao = vm.Duracao,
-                // CONVERSÃO CORRIGIDA:
-                NotaMedia = vm.NotaMedia.HasValue 
-                    ? (decimal?)vm.NotaMedia.Value 
+
+                // double? → decimal?
+                NotaMedia = vm.NotaMedia.HasValue
+                    ? (decimal?)vm.NotaMedia.Value
                     : null,
+
                 ElencoPrincipal = vm.ElencoPrincipal,
                 PosterPath = vm.PosterPath,
                 Cidade = vm.CidadeReferencia,
@@ -53,10 +56,6 @@ namespace Sistema_Cine.Controllers
             };
         }
 
-
-        // ------------------------------------------------------------
-        // MAP → VIEWMODEL
-        // ------------------------------------------------------------
         private FilmeViewModel MapToViewModel(Filme f)
         {
             return new FilmeViewModel
@@ -70,10 +69,12 @@ namespace Sistema_Cine.Controllers
                 Genero = f.Genero,
                 Lingua = f.Lingua,
                 Duracao = f.Duracao,
-                // CONVERSÃO CORRIGIDA:
+
+                // decimal? → double?
                 NotaMedia = f.NotaMedia.HasValue
                     ? (double?)f.NotaMedia.Value
                     : null,
+
                 ElencoPrincipal = f.ElencoPrincipal,
                 PosterPath = f.PosterPath,
                 PosterUrl = f.PosterCompleto,
@@ -83,37 +84,30 @@ namespace Sistema_Cine.Controllers
             };
         }
 
-        // ------------------------------------------------------------
+        // =====================================================================
         // CREATE
-        // ------------------------------------------------------------
+        // =====================================================================
+
         public IActionResult Create() => View(new FilmeViewModel());
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(FilmeViewModel viewModel)
+        public async Task<IActionResult> Create(FilmeViewModel vm)
         {
             if (!ModelState.IsValid)
-                return View(viewModel);
+                return View(vm);
 
-            try
-            {
-                var filme = MapToModel(viewModel);
+            var filme = MapToModel(vm);
+            filme.DataAtualizacao = DateTime.UtcNow;
 
-                filme.DataAtualizacao = DateTime.UtcNow;
-
-                await _repo.CreateAsync(filme);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Erro ao salvar filme.");
-                return View(viewModel);
-            }
+            await _repo.CreateAsync(filme);
+            return RedirectToAction(nameof(Index));
         }
 
-        // ------------------------------------------------------------
+        // =====================================================================
         // EDIT
-        // ------------------------------------------------------------
+        // =====================================================================
+
         public async Task<IActionResult> Edit(int id)
         {
             var filme = await _repo.GetByIdAsync(id);
@@ -129,37 +123,35 @@ namespace Sistema_Cine.Controllers
             if (id != vm.Id) return NotFound();
             if (!ModelState.IsValid) return View(vm);
 
-            try
-            {
-                var filme = await _repo.GetByIdAsync(id);
-                if (filme == null) return NotFound();
+            var filme = await _repo.GetByIdAsync(id);
+            if (filme == null) return NotFound();
 
-                filme.Titulo = vm.Titulo;
-                filme.TituloOriginal = vm.TituloOriginal;
-                filme.Descricao = vm.Sinopse;
-                filme.DataLancamento = vm.DataLancamento;
-                filme.Genero = vm.Genero;
-                filme.Duracao = vm.Duracao;
-                filme.NotaMedia = vm.NotaMedia;
-                filme.ElencoPrincipal = vm.ElencoPrincipal;
-                filme.Cidade = vm.CidadeReferencia;
-                filme.Latitude = vm.Latitude;
-                filme.Longitude = vm.Longitude;
-                filme.DataAtualizacao = DateTime.UtcNow;
+            filme.Titulo = vm.Titulo;
+            filme.TituloOriginal = vm.TituloOriginal;
+            filme.Descricao = vm.Sinopse;
+            filme.DataLancamento = vm.DataLancamento;
+            filme.Genero = vm.Genero;
+            filme.Duracao = vm.Duracao;
 
-                await _repo.UpdateAsync(filme);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                ModelState.AddModelError("", "Erro ao atualizar filme.");
-                return View(vm);
-            }
+            // ★ CORREÇÃO DO ERRO CS0266
+            filme.NotaMedia = vm.NotaMedia.HasValue
+                ? (decimal?)vm.NotaMedia.Value
+                : null;
+
+            filme.ElencoPrincipal = vm.ElencoPrincipal;
+            filme.Cidade = vm.CidadeReferencia;
+            filme.Latitude = vm.Latitude;
+            filme.Longitude = vm.Longitude;
+            filme.DataAtualizacao = DateTime.UtcNow;
+
+            await _repo.UpdateAsync(filme);
+            return RedirectToAction(nameof(Index));
         }
 
-        // ------------------------------------------------------------
+        // =====================================================================
         // DELETE (MODAL)
-        // ------------------------------------------------------------
+        // =====================================================================
+
         public async Task<IActionResult> Delete(int id)
         {
             var filme = await _repo.GetByIdAsync(id);
@@ -181,28 +173,35 @@ namespace Sistema_Cine.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ------------------------------------------------------------
-        // INDEX (CATÁLOGO LOCAL)
-        // ------------------------------------------------------------
+        // =====================================================================
+        // INDEX (PAGINADO)
+        // =====================================================================
+
         public async Task<IActionResult> Index(int page = 1, int pageSize = 10)
         {
             var filmes = (await _repo.ListAsync()).ToList();
 
-            var paged = filmes.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            var paged = filmes
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
 
-            return View(new MoviesIndexViewModel
+            var vm = new MoviesIndexViewModel
             {
                 Movies = paged.Select(MapToViewModel),
                 Page = page,
                 PageSize = pageSize,
                 TotalMovies = filmes.Count,
                 TotalPages = (int)Math.Ceiling(filmes.Count / (double)pageSize)
-            });
+            };
+
+            return View(vm);
         }
 
-        // ------------------------------------------------------------
-        // SEARCH (TMDb)
-        // ------------------------------------------------------------
+        // =====================================================================
+        // SEARCH TMDb
+        // =====================================================================
+
         public async Task<IActionResult> Search(string q, int page = 1)
         {
             if (string.IsNullOrWhiteSpace(q))
@@ -231,34 +230,34 @@ namespace Sistema_Cine.Controllers
                 Query = q,
                 Page = page,
                 TotalPages = api.TotalPaginas,
+                TotalResults = api.TotalResultados,
                 Results = results
             });
         }
 
-        // ------------------------------------------------------------
-        // IMPORT (TMDb → Local)
-        // ------------------------------------------------------------
+        // =====================================================================
+        // IMPORTAR FILME
+        // =====================================================================
+
         [HttpPost]
         public async Task<IActionResult> Import(int tmdbId)
         {
-            var detalhes = await _tmdb.GetMovieDetailsAsync(tmdbId);
-            if (detalhes == null) return NotFound();
+            var d = await _tmdb.GetMovieDetailsAsync(tmdbId);
+            if (d == null) return NotFound();
 
-            DateTime? data = DateTime.TryParse(detalhes.DataLancamento, out var dt) ? dt : null;
+            DateTime? data = DateTime.TryParse(d.DataLancamento, out var dt) ? dt : null;
 
             var filme = new Filme
             {
-                TmdbId = detalhes.Id,
-                Titulo = detalhes.Titulo,
-                TituloOriginal = detalhes.Titulo,
-                Descricao = detalhes.Sinopse,
+                TmdbId = d.Id,
+                Titulo = d.Titulo,
+                TituloOriginal = d.Titulo,
+                Descricao = d.Sinopse,
                 DataLancamento = data,
-                Genero = detalhes.Generos.FirstOrDefault()?.Nome,
-                Duracao = detalhes.DuracaoMinutos ?? 0,
-                NotaMedia = detalhes.NotaMedia.HasValue
-                    ? (decimal)detalhes.NotaMedia.Value
-                    : null,
-                PosterPath = detalhes.CaminhoPoster,
+                Genero = d.Generos.FirstOrDefault()?.Nome,
+                Duracao = d.DuracaoMinutos ?? 0,
+                NotaMedia = d.NotaMedia.HasValue ? (decimal?)d.NotaMedia.Value : null,
+                PosterPath = d.CaminhoPoster,
                 DataAtualizacao = DateTime.UtcNow
             };
 
@@ -266,9 +265,10 @@ namespace Sistema_Cine.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ------------------------------------------------------------
+        // =====================================================================
         // DETAILS (MODAL)
-        // ------------------------------------------------------------
+        // =====================================================================
+
         public async Task<IActionResult> Details(int id)
         {
             var filme = await _repo.GetByIdAsync(id);
@@ -283,19 +283,22 @@ namespace Sistema_Cine.Controllers
 
             if (vm.HasCoordinates)
             {
-                var clima = await _weather.GetForecastAsync(filme.Latitude!.Value, filme.Longitude!.Value);
+                var clima = await _weather.GetForecastAsync(
+                    filme.Latitude!.Value, filme.Longitude!.Value);
 
                 if (clima?.Diario?.Datas != null)
                 {
-                    vm.Forecast = clima.Diario.Datas.Select((dia, i) => new WeatherDayViewModel
-                    {
-                        Date = DateTime.Parse(dia),
-                        TempMin = clima.Diario.TemperaturaMinima?[i] ?? 0,
-                        TempMax = clima.Diario.TemperaturaMaxima?[i] ?? 0,
-                        Temperature = $"{clima.Diario.TemperaturaMinima?[i]:0.0}° / {clima.Diario.TemperaturaMaxima?[i]:0.0}°",
-                        Description = "Clima estimado",
-                        IconUrl = "/img/weather/default.png"
-                    }).ToList();
+                    vm.Forecast = clima.Diario.Datas.Select((dia, i) =>
+                        new WeatherDayViewModel
+                        {
+                            Date = DateTime.Parse(dia),
+                            TempMin = clima.Diario.TemperaturaMinima?[i] ?? 0,
+                            TempMax = clima.Diario.TemperaturaMaxima?[i] ?? 0,
+                            Temperature = $"{clima.Diario.TemperaturaMinima?[i]:0.0}° / {clima.Diario.TemperaturaMaxima?[i]:0.0}°",
+                            Description = "Clima estimado",
+                            IconUrl = "/img/weather/default.png"
+                        }
+                    ).ToList();
                 }
             }
 
@@ -305,9 +308,10 @@ namespace Sistema_Cine.Controllers
             return View(vm);
         }
 
-        // ------------------------------------------------------------
+        // =====================================================================
         // EXPORTAÇÃO
-        // ------------------------------------------------------------
+        // =====================================================================
+
         public async Task<FileResult> ExportCsv()
         {
             var filmes = (await _repo.ListAsync()).ToList();
